@@ -1,0 +1,234 @@
+
+
+
+{% extends 'web/base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+{% block meta %}
+<meta name="title" content="{{webzin.title}}">
+<meta name="description" content="{{webzin.edition}}">
+<meta property="og:image" content="{{webzin.cover.crop.1000x600}}">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{request.build_absolute_uri}}">
+<meta property="og:title" content="{{webzin.title}}">
+<meta property="og:description" content="{{webzin.edition}}">
+<!-- Twitter -->
+<meta property="twitter:card" content="{{webzin.title}}">
+<meta property="twitter:url" content="{{request.build_absolute_uri}}">
+<meta property="twitter:title" content="{{webzin.title}}">
+<meta property="twitter:description" content="{{webzin.edition}}">
+{% endblock meta %}
+{% block content %}
+
+
+
+<main>
+    <div class="container">
+        <div class="hot-tags pb-8tag font-small align-self-center">
+            <div class="widget-header-3">
+                <div class="row align-self-center">
+                    <div class="col-md-4 align-self-center">
+                        <h5 class="widget-title"></h5>
+                    </div>
+                    <div class="col-md-8 text-md-right font-small align-self-center">
+                        <p class="d-inline-block mr-5 mb-0"><i class="elegant-icon  icon_tag_alt mr-5 text-muted"></i>Hot tags:</p>
+                        <ul class="list-inline d-inline-block tags">
+                            {% for hotag in hotags %}
+                            <li class="list-inline-item"><a href="{% url 'blog:webzin-tags' hotag.tag.slug %}"># {{hotag.tag.name}}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- First Section -->
+        <div class="loop-grid mb-30">
+            <div class="row">
+
+                <!-- Slide article -->
+                <div class="col-lg-4 mb-30 v-center-banner">
+                    <div class="hover-up border-radius-10 overflow-hidden transition-normal position-relative wow fadeInUp animated" style="margin: auto;">
+                        <div class="arrow-cover"></div>
+                        <div class="slide-fade">
+                            <div class="position-relative post-thumb">
+                                <div class="thumb-overlay img-hover-slide position-relative" style="background-image: url({{webzin.cover.crop.300x461}})">
+                                    <a class="img-link" href="{% url 'blog:webzin' webzin.slug %}"></a>
+                                    <div class="post-content-overlay text-white ml-30 mr-30 pb-30 post-title-container">
+                                        
+                                        <h3 class="post-title font-weight-900 mb-20">
+                                            <a class="text-white p-5" href="{% url 'blog:webzin' webzin.slug %}">{{webzin.title}}</a>
+                                        </h3>
+                                        <div class="entry-meta meta-1 font-small text-white mt-10 pr-5 pl-5">
+                                            <span class="post-on">20 minutes ago</span>
+                                            <span class="hit-count has-dot">23k Views</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide article -->
+
+
+                <!-- Small Articles 3 -->
+                <div class="col-lg-8 sm-none">
+                    <div class="row">
+                {% for webzinarticle in webzinarticles %}    
+                <article class=" col-lg-4 col-md-4 mb-30 wow fadeInUp animated pl-0 pr-0 " data-wow-delay="0.2s ">
+                    <div class="post-card-1 border-radius-10 hover-up ">
+                        <div class="post-thumb thumb-overlay img-hover-slide position-relative " style="background-image: url({{webzinarticle.article_image.url}}) ">
+                            <a class="img-link " href="{% url 'blog:webzinarticle' webzinarticle.slug %}"></a>
+                            <!-- <span class="top-right-icon bg-success "><i
+                                        class="elegant-icon icon_camera_alt "></i></span> -->
+                            <ul class="social-share ">
+                                <li><a href="# "><i class="elegant-icon social_share "></i></a></li>
+                                <li><a class="fb " target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}" title="Facebook "><i
+                                    class="elegant-icon social_facebook "></i></a></li>
+                                <li><a class="tw " target="_blank" href="https://www.twitter.com/intent/tweet?text={{instance.title|urlencode}}%20{{request.build_absolute_uri}}" title="Tweet now "><i
+                                    class="elegant-icon social_twitter "></i></a></li>
+                                <li><a class="pt " href="https://api.whatsapp.com/send?text=*{{instance.title|urlencode}}*%0A%0A{{instance.summary|urlencode}}%0A{{request.build_absolute_uri}}" target="_blank " title="Pin it "><i class="fa-brands fa-whatsapp"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="post-content p-10 ">
+
+                            <div class="d-flex post-card-content ">
+                                <h5 class="post-title mb-20 font-weight-900 ">
+                                    <a href="{% url 'blog:webzinarticle' webzinarticle.slug %}">{{webzinarticle.title}}</a>
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="entry-meta meta-1 float-left font-x-small text-uppercase bottom-zero">
+                            <span class="post-on ">27 August</span>
+                            <span class="time-reading has-dot ">12 mins read</span>
+                            <span class="post-by has-dot ">23k views</span>
+                        </div>
+                    </div>
+                </article>
+
+                {% endfor %}   
+
+
+
+                
+
+                
+                </div>
+                
+                </div>
+                <!-- Small Articles 3 -->
+
+
+
+            </div>
+        </div>
+
+        <!-- First Section -->
+
+        <div class="bg-grey pt-50 pb-50 ">
+            <div class="container ">
+                <div class="row ">
+                    <div class="col-lg-12 ">
+                        {% for pageItem in pageItems %}
+                        <!-- Videos -->
+                        <div class="post-module-2 ">
+                            <div class="widget-header-1 position-relative mb-30 wow fadeInUp animated ">
+                                <h5 class="mt-5 mb-30 ">{{pageItem.category.name}}</h5>
+                            </div>
+                            <div class="loop-list loop-list-style-1">
+                                <div class="row ">
+                                    {% for article in pageItem.articles %}
+                                    <article class="col-md-6 mb-40 wow fadeInUp animated ">
+                                        <div class="post-card-1 border-radius-10 hover-up ">
+                                            <div class="row">
+                                                <div class="col-lg-5 col-md-5 pl-3">
+                                                    <div class="post-thumb thumb-overlay img-hover-slide position-relative" style="background-image: url({{article.article_image.crop.332x130}}); background-size:contain;">
+                                                        <a class="img-link" href="{% url 'blog:webzinarticle' article.slug %}"></a>
+                                                        <ul class="social-share ">
+                                                            <li><a href="# "><i class="elegant-icon social_share "></i></a></li>
+                                                            <li><a class="fb " target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}" title="Facebook "><i
+                                                                class="elegant-icon social_facebook "></i></a></li>
+                                                            <li><a class="tw " target="_blank" href="https://www.twitter.com/intent/tweet?text={{instance.title|urlencode}}%20{{request.build_absolute_uri}}" title="Tweet now "><i
+                                                                class="elegant-icon social_twitter "></i></a></li>
+                                                            <li><a class="pt " href="https://api.whatsapp.com/send?text=*{{instance.title|urlencode}}*%0A%0A{{instance.summary|urlencode}}%0A{{request.build_absolute_uri}}" target="_blank " title="Pin it "><i class="fa-brands fa-whatsapp"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-7 col-md-7">
+                                                    <div class="post-content p-10 ">
+                                                        <div class="d-flex post-card-content ">
+                                                            <h6 class="post-title mb-20 font-weight-900 ">
+                                                                <a href="{% url 'blog:webzinarticle' article.slug %}">{{article.title}} </a>
+                                                            </h6>
+                                                            <!-- <p> - {{article.author.name}}</p> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 col-md-12">
+                                                    <div class="d-flex p-2">
+                                                        
+                                                        <img src="{{article.author.photo.url}}" alt="" style="width: 30px; height: 30px; object-fit: cover; border-radius: 50%;">
+                                                        {% if article.custom_author %}
+                                                        <p class="pl-3"> - {{article.custom_author|safe}}</p>
+                                                        {% else %}
+                                                        <p class="pl-3"> - {{article.author.name}}</p>
+                                                        {% endif %}
+                                                        
+                                                    </div>
+            
+                                                   
+                                                </div>
+
+                                            </div>  
+                                        </div>
+                                    </article>
+                                    {% endfor %}
+                                </div>
+
+                                <!-- <div class="row"><div class="col-12"><button class="float-right btn btn-radius bg-primary text-white ml-15 font-small box-shadow">Read more</button></div></div> -->
+                            </div>
+                        </div>
+
+
+                        <!-- Videos -->
+
+                        {% endfor %}
+
+                        
+
+
+                        <!-- Short Read -->
+                        <hr>    
+                        
+                        <!-- <div class="pagination-area mb-30 wow fadeInUp animated ">
+                            <nav aria-label="Page navigation example ">
+                                <ul class="pagination justify-content-start ">
+                                    <li class="page-item "><a class="page-link " href="# "><i
+                                                class="elegant-icon arrow_left "></i></a></li>
+                                    <li class="page-item active "><a class="page-link " href="# ">01</a></li>
+                                    <li class="page-item "><a class="page-link " href="# ">02</a></li>
+                                    <li class="page-item "><a class="page-link " href="# ">03</a></li>
+                                    <li class="page-item "><a class="page-link " href="# ">04</a></li>
+                                    <li class="page-item "><a class="page-link " href="# "><i
+                                                class="elegant-icon arrow_right "></i></a></li>
+                                </ul>
+                            </nav>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+</main>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+    //   page specific scripts
+    console.log("This will run only in index.html")
+</script>
+{% endblock %}

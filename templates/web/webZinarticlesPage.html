@@ -1,0 +1,131 @@
+
+{% extends 'web/base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+    <main>
+        <div class="container">
+            <div class="hot-tags pt-30 pb-30 font-small align-self-center">
+                <div class="widget-header-3">
+                    <div class="row align-self-center">
+                        <div class="col-md-4 align-self-center">
+                            <h5 class="widget-title">Featured posts</h5>
+                        </div>
+                        {% include 'web/partials/hottags.html' %}
+                    </div>
+                </div>
+            </div>
+
+           
+
+            <div class="bg-grey pt-50 pb-50 ">
+                <div class="container ">
+                    <div class="row ">
+                        <div class="col-lg-12 ">
+
+                            <!-- Articles -->
+                            <div class="post-module-2 ">
+                                <div class="widget-header-1 position-relative mb-30 wow fadeInUp animated ">
+                                    <h5 class="mt-5 mb-30 ">{{category.name }}</h5>
+                                </div>
+                                <div class="loop-list loop-list-style-1">
+                                    <div class="row ">
+
+                                        {% for article in page_obj %}
+                                        <article class="col-md-6 mb-40 wow fadeInUp animated ">
+                                            <div class="post-card-1 border-radius-10 hover-up ">
+                                                <div class="row">
+                                                    <div class="col-lg-5 col-md-5 p-4    pl-4">
+                                                        <div class="post-thumb thumb-overlay img-hover-slide position-relative" style="background-image: url({{article.article_image.crop.180x130}}) ">
+                                                            <a class="img-link " href="{% url 'blog:webzinarticle' article.slug %}"></a>
+                                                            <ul class="social-share ">
+                                                                <li><a href="# "><i class="elegant-icon social_share "></i></a>
+                                                                </li>
+                                                                <li><a class="fb " href="# " title="Share on Facebook " target="_blank "><i
+                                                                            class="elegant-icon social_facebook "></i></a></li>
+                                                                <li><a class="tw " href="# " target="_blank " title="Tweet now "><i
+                                                                            class="elegant-icon social_twitter "></i></a></li>
+                                                                <li><a class="pt " href="# " target="_blank " title="Pin it "><i
+                                                                            class="elegant-icon social_pinterest "></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-7 col-md-7">
+                                                        <div class="post-content p-10 ">
+                                                            <div class="d-flex post-card-content ">
+                                                                <h6 class="post-title mb-20 font-weight-900 ">
+                                                                    <a href="{% url 'blog:webzinarticle' article.slug %}">{{article.title}}</a>
+                                                                </h6>
+                                                                <p> {{author.name}}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>  
+                                            </div>
+                                        </article>
+                                        {% endfor %}
+                                       
+
+                                      
+                                    </div>
+
+                                   
+                                </div>
+                            </div>
+
+
+                            <!-- Articles -->
+                            
+                            <hr> 
+                            <div class="pagination-area mb-30 wow fadeInUp animated  float-right">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination justify-content-start ">
+
+                                        {% if page_obj.has_previous %}
+                                        {% if tag_filter %}
+                                            <li class="page-item "><a href="&page={{ page_obj.previous_page_number }}"><i
+                                        class="elegant-icon arrow_left "></i></a></li>
+                                        {% else %}
+                                        <li class="page-item "><a href="?page={{ page_obj.previous_page_number }}"><i
+                                            class="elegant-icon arrow_left "></i></a></li>
+                                        {% endif %}
+                                        {% else %}
+                                        <li></li>
+                                        {% endif %}
+                                        {% if  page_obj.number != page_obj.paginator.num_pages %}
+                                        <li class="page-item active "><a class="page-link " href="# "> {{ page_obj.number }}</a></li>
+
+                                        {% endif %}
+
+                                        {% if page_obj.has_next %}
+                                        {% if tag_filter %}
+                                        <li class="page-item "><a class="page-link " href="&page={{ page_obj.next_page_number }}"><i
+                                                    class="elegant-icon arrow_right "></i></a></li>
+                                        {% else %}
+                                        <li class="page-item "><a class="page-link " href="?page={{ page_obj.next_page_number }}"><i
+                                            class="elegant-icon arrow_right "></i></a></li>
+
+                                        {% endif %}
+                                        {% endif %}
+                                    </ul>
+                                    <p class="p-1">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</p>
+                                </nav>
+                            </div>
+
+                              
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </main>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    //   page specific scripts
+    console.log("This will run only in index.html")
+</script>
+{% endblock %}
+

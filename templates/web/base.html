@@ -1,0 +1,181 @@
+<!DOCTYPE html> {% load static %}
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Viswamaithri">
+    <meta name="description" content="views & insights behind the news">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="propeller" content="3f5162655d549650b0675c3a7154ec47"> {% block meta %}{% endblock meta %}
+    <title>{% block title %}Default Title{% endblock %}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'web/assets/imgs/theme/favicon.png' %}">
+    <!-- NewsBoard CSS  -->
+    <link rel="stylesheet" href="{% static 'web/assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'web/assets/css/widgets.css' %}">
+    <link rel="stylesheet" href="{% static 'web/assets/css/responsive.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'web/assets/css/carousel/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'web/assets/css/carousel/owl.theme.default.min.css' %}">
+</head>
+
+<body>
+    <div class="scroll-progress primary-bg"></div>
+    <!-- Start Preloader -->
+    <div class="preloader text-center">
+        <div class="circle"></div>
+    </div>
+    <!--Offcanvas sidebar-->
+    <aside id="sidebar-wrapper" class="custom-scrollbar offcanvas-sidebar">
+        <button class="off-canvas-close"><i class="elegant-icon icon_close"></i></button>
+        <div class="sidebar-inner">
+            <!--Categories-->
+            <div class="sidebar-widget widget_categories mb-50 mt-30">
+                <div class="widget-header-2 position-relative">
+                    <h5 class="mt-5 mb-15">Account</h5>
+                </div>
+                <div class="widget_nav_menu">
+                    <ul>
+                        <li class="cat-item cat-item-2"><a href="{% url 'blog:logout' %}">logout</a> </li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+    </aside>
+    <!-- Start Header -->
+
+
+    {% include 'web/partials/header.html' %}
+
+    {% block content %} {% endblock %}
+
+    <!-- Footer Start-->
+    <footer class="pt-50 pb-20 bg-grey ">
+        <div class="container ">
+            <div class="row ">
+                <div class="col-lg-4 col-md-6 ">
+                    <div class="sidebar-widget wow fadeInUp animated mb-30 ">
+                        <div class="widget-header-2 position-relative mb-30 ">
+                            <h5 class="mt-5 mb-30 ">About</h5>
+                        </div>
+                        <div class="textwidget ">
+                            <p>
+                                Viswamaithri Website accessed through viswamaithrithinks.com is a non-profit
+                                organization constituted under the creative supervision of Viswavidya Gurukulam.
+                            </p>
+                            <p><strong class="color-black ">Address</strong><br> Sakthibodhi Gurukulam<br> Thiroor
+                                (road) , Mulankunnathukaavu PO, <br> Pottore, Thrissur Dt<br>Pin 680581
+                            </p>
+                            <p><strong class="color-black ">Follow me</strong><br>
+
+
+                            <ul class="header-social-network d-inline-block list-inline color-white mb-20 ">
+                                <li class="list-inline-item "><a class="fb " target="_blank"
+                                        href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}"
+                                        title="Facebook "><i class="elegant-icon social_facebook "></i></a></li>
+                                <li class="list-inline-item "><a class="tw " target="_blank"
+                                        href="https://www.twitter.com/intent/tweet?text={{instance.title|urlencode}}%20{{request.build_absolute_uri}}"
+                                        title="Tweet now "><i class="elegant-icon social_twitter "></i></a></li>
+                                <li class="list-inline-item "><a class="pt "
+                                        href="https://api.whatsapp.com/send?text=*{{instance.title|urlencode}}*%0A%0A{{instance.summary|urlencode}}%0A{{request.build_absolute_uri}}"
+                                        target="_blank " title="Pin it "><i class="fa-brands fa-whatsapp"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 ">
+                    <div class="sidebar-widget widget_categories wow fadeInUp animated mb-30 " data-wow-delay="0.1s ">
+                        <div class="widget-header-2 position-relative mb-30 ">
+                            <h5 class="mt-5 mb-30 ">Quick link</h5>
+                        </div>
+                        <ul class="font-small ">
+                            <li class="cat-item cat-item-2 "><a href="{% url 'blog:about' %}">About</a></li>
+                            <li class="cat-item cat-item-4 "><a href="{% url 'blog:home' %}">Home</a></li>
+                            <li class="cat-item cat-item-5 "><a href="{% url 'blog:webzins' %}">​​WebZines</a></li>
+                            <li class="cat-item cat-item-6 "><a href="{% url 'blog:terms' %}">Terms of Service</a></li>
+                            <li class="cat-item cat-item-6 "><a href="{% url 'blog:privacypolicy' %}">Privacy Policy</a>
+                            </li>
+                            <li class="cat-item cat-item-6 "><a href="{% url 'blog:cancellationypolicy' %}">Cancellation
+                                    Policy</a></li>
+                            <li class="cat-item cat-item-7 "><a href="{% url 'blog:about' %}">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- <div class="col-lg-3 col-md-6 ">
+                    <div class="sidebar-widget widget_tagcloud wow fadeInUp animated mb-30 " data-wow-delay="0.2s ">
+                        <div class="widget-header-2 position-relative mb-30 ">
+                            <h5 class="mt-5 mb-30 ">Tagcloud</h5>
+                        </div>
+                        <div class="tagcloud mt-50 ">
+                            <a class="tag-cloud-link " href="category.html ">beautiful</a>
+                            <a class="tag-cloud-link " href="category.html ">New York</a>
+                            <a class="tag-cloud-link " href="category.html ">droll</a>
+                            <a class="tag-cloud-link " href="category.html ">intimate</a>
+                            <a class="tag-cloud-link " href="category.html ">loving</a>
+                            <a class="tag-cloud-link " href="category.html ">travel</a>
+                            <a class="tag-cloud-link " href="category.html ">fighting </a>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="col-lg-4 col-md-6 ">
+                    <div class="sidebar-widget widget_newsletter wow fadeInUp animated mb-30 " data-wow-delay="0.3s ">
+                        <div class="widget-header-2 position-relative mb-30 ">
+                            <h5 class="mt-5 mb-30 ">Newsletter</h5>
+                        </div>
+                        <div class="newsletter ">
+                            <p class="font-medium ">Subscribe to our newsletter and get our newest updates right on your
+                                inbox.
+                            </p>
+                            <form class="input-group form-subcriber mt-30 d-flex ">
+                                <input type="email " class="form-control bg-white font-small "
+                                    placeholder="Enter your email ">
+                                <button class="btn bg-primary text-white " type="submit ">Subscribe</button>
+                                <label class="mt-20 ">I agree to the <a href="# " target="_blank ">terms &amp;
+                                        conditions</a> </label>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copy-right pt-30 mt-20 wow fadeInUp animated ">
+                <!-- <p class="float-md-left font-small text-muted ">© 2020, Stories - Personal Blog HTML Template </p>
+                <p class="float-md-right font-small text-muted ">
+                    
+                </p> -->
+            </div>
+        </div>
+    </footer>
+    
+    <!-- End Footer -->
+    <div class="dark-mark "></div>
+    <!-- Vendor JS-->
+    <script src="{% static 'web/assets/js/vendor/modernizr-3.6.0.min.js' %}"></script>
+    <script src="{% static 'web/assets/js/vendor/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'web/assets/js/vendor/popper.min.js' %}"></script>
+    <script src="{% static 'web/assets/js/vendor/bootstrap.min.js' %}"></script>
+    <script src="{% static 'web/assets/js/vendor/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'web/assets/js/vendor/slick.min.js' %}"></script>
+    <script src="{% static 'web/assets/js/vendor/wow.min.js' %}"></script>
+    <script src="{% static 'web/assets/js/vendor/jquery.ticker.js' %}"></script>
+    <script src="{% static 'web/assets/js/vendor/jquery.vticker-min.js' %}"></script>
+    <script src="{% static 'web/assets/js/vendor/jquery.scrollUp.min.js' %}"></script>
+    <script src="{% static 'web/assets/js/vendor/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'web/assets/js/vendor/jquery.magnific-popup.js' %}"></script>
+    <script src="{% static 'web/assets/js/vendor/jquery.sticky.js' %}"></script>
+    <script src="{% static 'web/assets/js/vendor/perfect-scrollbar.js' %}"></script>
+    <script src="{% static 'web/assets/js/vendor/waypoints.min.js' %}"></script>
+    <script src="{% static 'web/assets/js/vendor/jquery.theia.sticky.js' %}"></script>
+    <!-- NewsBoard JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.15.3/dist/sweetalert2.all.min.js"></script>
+    <script src="{% static 'web/assets/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'web/assets/js/main.js' %}"></script>
+
+    {% block javascript %}{% endblock %}
+</body>
+
+</html>

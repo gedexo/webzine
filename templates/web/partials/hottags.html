@@ -1,0 +1,9 @@
+{% load static %}
+<div class="col-md-12 text-md-right font-small align-self-center border-top border-bottom py-2">
+    <p class="d-inline-block mr-5 mb-0"><i class="elegant-icon  icon_tag_alt mr-5 text-muted"></i>Hot tags:</p>
+    <ul class="list-inline d-inline-block tags">
+        {% for tag in tags %}
+        <li class="list-inline-item"><a href="{% url 'blog:taggedarticles' tag.tag.slug %}"># {{tag.tag.name}}</a></li>
+        {% endfor %}
+    </ul>
+</div>

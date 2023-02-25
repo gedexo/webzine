@@ -1,0 +1,209 @@
+
+{% extends 'web/base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <main class="bg-grey pb-30">
+        <div class="container single-content">
+
+
+            <!-- Title ,Author and Share links  -->
+            <div class="entry-header entry-header-style-1 mb-50 pt-50">
+                <h1 class="entry-title mb-50 font-weight-900">
+                    {{video.title}}
+                </h1>
+                <div class="row">
+                    <div class="col-md-6 text-right d-none d-md-inline">
+                        <ul class="header-social-network d-inline-block list-inline mr-15">
+                            <li class="list-inline-item text-muted"><span>Share this: </span></li>
+                            <li class="list-inline-item"><a class="social-icon fb text-xs-center" target="_blank"
+                                href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}"><i class="elegant-icon social_facebook"></i></a></li>
+                            <li class="list-inline-item"><a class="social-icon tw text-xs-center" target="_blank"
+                                href="https://www.twitter.com/intent/tweet?text={{instance.title|urlencode}}%20{{request.build_absolute_uri}}"><i class="elegant-icon social_twitter "></i></a></li>
+                            <li class="list-inline-item"><a class="social-icon pt text-xs-center" target="_blank"
+                                href="https://api.whatsapp.com/send?text=*{{instance.title|urlencode}}*%0A%0A{{instance.summary|urlencode}}%0A{{request.build_absolute_uri}}"><i class="fa-brands fa-whatsapp"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Title, Author and Share links  -->
+
+            <!--Video-->
+            <div class="video-container">
+                <iframe src="{{video.youtube_link}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+            <!--Video-->
+
+            
+            <div class="article-content-area rich-text-area">
+                {{ video.page_contents | safe }}
+            </div>
+            <article class="entry-wraper mb-50">
+                <!-- Tags -->
+                <div class="entry-bottom mt-50 mb-30 wow fadeIn animated">
+                    <div class="col-md-8 text-md-right font-small align-self-center">
+                            <p class="d-inline-block mr-5 mb-0"><i class="elegant-icon  icon_tag_alt mr-5 text-muted"></i>Tags:</p>
+                            <ul class="list-inline d-inline-block tags">
+                                {% for v_tag in v_tags %}
+                                <li class="list-inline-item"><a href="{% url 'blog:taggedarticles' v_tag.slug %}"># {{v_tag.name}}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                </div>
+                <!-- Tags -->
+
+                <!-- Comment View Section -->
+
+                <!-- <div class="single-social-share clearfix wow fadeIn animated">
+                    <div class="entry-meta meta-1 font-small color-grey float-left mt-10">
+                        <span class="hit-count mr-15"><i class="elegant-icon icon_comment_alt mr-5"></i>182 comments</span>
+                        <span class="hit-count mr-15"><i class="elegant-icon icon_like mr-5"></i>268 likes</span>
+                        <span class="hit-count"><i class="elegant-icon icon_star-half_alt mr-5"></i>Rate: 9/10</span>
+                    </div>
+                    <ul class="header-social-network d-inline-block list-inline float-md-right mt-md-0 mt-4">
+                        <li class="list-inline-item text-muted"><span>Share this: </span></li>
+                        <li class="list-inline-item"><a class="social-icon fb text-xs-center" target="_blank" href="#"><i class="elegant-icon social_facebook"></i></a></li>
+                        <li class="list-inline-item"><a class="social-icon tw text-xs-center" target="_blank" href="#"><i class="elegant-icon social_twitter "></i></a></li>
+                        <li class="list-inline-item"><a class="social-icon pt text-xs-center" target="_blank" href="#"><i class="elegant-icon social_pinterest "></i></a></li>
+                    </ul>
+                </div> -->
+
+                <!-- Comment View Section -->
+
+
+                <!--author box-->
+                <!-- <div class="author-bio p-30 mt-50 border-radius-10 bg-white wow fadeIn animated">
+                    <div class="author-image mb-30">
+                        <a href="author.html"><img src="{% static 'web/assets/imgs/authors/author-3.jpg' %}" alt="" class="avatar"></a>
+                    </div>
+                    <div class="author-info">
+                        <h4 class="font-weight-bold mb-20"><span class="vcard author"><span class="fn"><a href="author.html" title="Posted by Barbara Cartland" rel="author">Barbara Cartland</a></span></span>
+                        </h4>
+                        <h5 class="text-muted">About author</h5>
+                        <div class="author-description text-muted">You should write because you love the shape of stories and sentences and the creation of different words on a page. </div>
+                        <a href="author.html" class="author-bio-link mb-md-0 mb-3">View all posts (125)</a>
+                        <div class="author-social">
+                            <ul class="author-social-icons">
+                                <li class="author-social-link-facebook"><a href="#" target="_blank"><i class="ti-facebook"></i></a></li>
+                                <li class="author-social-link-twitter"><a href="#" target="_blank"><i class="ti-twitter-alt"></i></a></li>
+                                <li class="author-social-link-pinterest"><a href="#" target="_blank"><i class="ti-pinterest"></i></a></li>
+                                <li class="author-social-link-instagram"><a href="#" target="_blank"><i class="ti-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div> -->
+
+
+                <!--related posts-->
+                <div class="related-posts">
+                    <div class="post-module-3">
+                        <div class="widget-header-2 position-relative mb-30">
+                            <h5 class="mt-5 mb-30">Related posts</h5>
+                        </div>
+                        <div class="loop-list loop-list-style-1">
+
+
+                            <article class="hover-up-2 transition-normal wow fadeInUp  animated">
+                                <div class="row mb-40 list-style-2">
+                                    <div class="col-md-4">
+                                        {% include 'web/partials/hottags.html' %}
+                                    </div>
+                                    <div class="col-md-8 align-self-center">
+                                        <div class="post-content">
+                                            
+                                            <h5 class="post-title font-weight-900 mb-20">
+                                                <a href="#">Helpful Tips for Working from Home as a Freelancer</a>
+                                                
+                                            </h5>
+                                            <div class="entry-meta meta-1 float-left font-x-small text-uppercase">
+                                                <span class="post-on">7 August</span>
+                                                <span class="time-reading has-dot">11 mins read</span>
+                                                <span class="post-by has-dot">3k views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+
+
+                            <article class="hover-up-2 transition-normal wow fadeInUp  animated">
+                                <div class="row mb-40 list-style-2">
+                                    <div class="col-md-4">
+                                        <div class="post-thumb position-relative border-radius-5">
+                                            <div class="img-hover-slide border-radius-5 position-relative" style="background-image: url({% static 'web/assets/imgs/news/news-4.jpg' %})">
+                                                <a class="img-link" href="#"></a>
+                                            </div>
+                                            <ul class="social-share">
+                                                <li><a href="#"><i class="elegant-icon social_share"></i></a></li>
+                                                <li><a class="fb" href="#" title="Share on Facebook" target="_blank"><i class="elegant-icon social_facebook"></i></a></li>
+                                                <li><a class="tw" href="#" target="_blank" title="Tweet now"><i class="elegant-icon social_twitter"></i></a></li>
+                                                <li><a class="pt" href="#" target="_blank" title="Pin it"><i class="elegant-icon social_pinterest"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 align-self-center">
+                                        <div class="post-content">  
+                                            <h5 class="post-title font-weight-900 mb-20">
+                                                <a href="#">10 Easy Ways to Be Environmentally Conscious At Home</a>
+                                            </h5>
+                                            <div class="entry-meta meta-1 float-left font-x-small text-uppercase">
+                                                <span class="post-on">27 Sep</span>
+                                                <span class="time-reading has-dot">10 mins read</span>
+                                                <span class="post-by has-dot">22k views</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comment-form wow fadeIn animated">
+                    <div class="widget-header-2 position-relative mb-30">
+                        <h5 class="mt-5 mb-30">Leave a Comment</h5>
+                    </div>
+                    <form class="form-contact comment_form" action="#" id="commentForm">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="Write Comment"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <input class="form-control" name="name" id="name" type="text" placeholder="Name">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <input class="form-control" name="email" id="email" type="email" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <input class="form-control" name="website" id="website" type="text" placeholder="Website">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn button button-contactForm">Post Comment</button>
+                        </div>
+                    </form>
+                </div>
+            </article>
+        </div>
+        <!--container-->
+    </main>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    //   page specific scripts
+    console.log("This will run only in index.html")
+</script>
+{% endblock %}

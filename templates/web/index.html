@@ -1,0 +1,281 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block title %}Viswamaithrithinks{% endblock %}
+
+{% block content %}
+<main>
+    <div class="container">
+
+        <div class="hot-tags font-small align-self-center mb-4 tag">
+            <div class="widget-header-3">
+                <div class="row align-self-center">
+                    {% include 'web/partials/hottags.html' %}
+                </div>
+            </div>
+        </div>
+
+        <div class="loop-grid mb-30">
+           
+            <div class="row">
+
+                <!-- Slide article -->
+                <div class="col-lg-7 mb-20">
+                    <div class=" hover-up border-radius-10 overflow-hidden transition-normal position-relative wow fadeInUp animated bxshadow">
+                        <div class="slide-fade">
+                            {% for latest in latests|slice:":1" %} 
+                            <div class="position-relative post-thumb">
+                                
+                                <div class="thumb-overlay  position-relative">
+                                    <a class="img-link" href="{% url 'blog:article' latest.slug %}">
+                                        <img src="{{latest.article_image.url}}" alt="">
+                                    </a>
+                                           
+                                    <div class="post-content-overlay text-white ml-30 mr-30 pb-30">
+                                        <div class="position-relative d-flex">
+                                            <a class="authr-carouse-photo"><img class="img-circle author-carusel-pic" src="{% for author in latest.author.all %}{{ author.photo.url }}{% endfor %}" alt=""></a>
+                                            {% if latest.custom_author %}
+                                                <a class="carousel-authname"><span class="author-name auth-name-hm">{{ latest.custom_author|safe }}</span></a>
+                                            {% else %}
+                                                <a class="carousel-authname"><span class="author-name auth-name-hm">{% for author in latest.author.all %}{{ author.name }}{% endfor %}</span></a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide article -->
+
+                <div class="col-lg-5">
+                    <div class="row">
+                        {% if hotarticles %}
+                            {% for hotarticle in hotarticles %}
+                            <article class=" col-lg-6 col-md-4 mb-2 wow fadeInUp animated pl-0 pr-0 " data-wow-delay="0.2s ">
+                                <div class="post-card-1 border-radius-10 hover-up ">
+                                    <div class="post-thumb thumb-overlay-2 img-hover-slide position-relative">                                        
+                                        <a class="img-link " href="{% url 'blog:article' hotarticle.article.slug %}">
+                                            <img src="{{hotarticle.article.article_image.url}}" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="post-content pad-7px">
+                                        <p class="mb-2">
+                                            <a class="" href=""><img class="img-circle author-imghome" src="{% for author in hotarticle.article.author.all %}{{ author.photo.url }}{% endfor %}" alt=""></a>
+                                            {% if hotarticle.article.latest_article.custom_author %}
+                                            <a ><span class="author-name auth-name-hm  float-right">{{hotarticle.article.custom_author|safe}}</span></a>
+                                            {% else %}
+                                            <a ><span class="author-name auth-name-hm  float-right">{% for author in hotarticle.article.author.all %}{{ author.name }}{% endfor %}</span></a>
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                    <div class="entry-meta meta-1 float-left font-x-small text-uppercase bottom-zero">
+                                        <span class="post-on ">{{ hotarticle.article.published|date:"M d, Y" }}</span>
+                                        <span class="time-reading has-dot ">{{ hotarticle.article.read_time}} mins read</span>
+                                    </div>
+                                </div>
+                            </article>
+                            {% endfor %}
+                        {% else %}
+                        
+                        {% for latest_article in category_article|slice:":4" %}
+                        <article class=" col-lg-6 col-md-4 mb-2 wow fadeInUp animated pl-0 pr-0 " data-wow-delay="0.2s ">
+                            <div class="post-card-1 border-radius-10 hover-up ">
+                                <div class="post-thumb thumb-overlay-2 img-hover-slide position-relative">
+                                    
+                                    <a class="img-link " href="{% url 'blog:article' latest_article.slug %}">
+                                        <img src="{{latest_article.article_image.url}}" alt="">
+                                    </a>
+
+                                </div>
+                                <div class="post-content pad-7px">
+                                    <p class="mb-2">
+                                        <a class="" href=""><img class="img-circle author-imghome" src="{% for author in latest_article.author.all %}{{ author.photo.url }}{% endfor %}" alt=""></a>
+                                        {% if latest_article.custom_author %}
+                                        <a ><span class="author-name auth-name-hm  float-right">{{latest_article.custom_author|safe}}</span></a>
+
+                                        {% else %}
+                                        <a ><span class="author-name auth-name-hm  float-right">{% for author in latest_article.author.all %}{{ author.name }}{% endfor %}</span></a>
+                                        {% endif %}
+                                    </p>
+    
+                                </div>
+                                <div class="entry-meta meta-1 float-left font-x-small text-uppercase bottom-zero">
+                                    <span class="post-on ">{{ latest_article.published|date:"M d, Y" }}</span>
+                                    <span class="time-reading has-dot ">{{ latest_article.read_time}} mins read</span>
+        
+                                </div>
+                            </div>
+                        </article>
+                        {% endfor %}
+
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-grey pt-50 mb-4 bg-gry-pl">
+            <div class="container ">
+                <div class="row ">
+                    <div class="col-lg-12 ">
+
+                        <!-- WebZin -->
+                        {% if webzins %}
+                        <div class="post-module-2">
+                            <div class="widget-header-1 position-relative mb-30 wow fadeInUp animated ">
+                                <h5 class="mt-5 ">WebZine</h5>
+                            </div>
+
+                            <div class="row">
+                                <div class="owl-carousel owl-theme p-3">
+                                    {% for webzin in webzins %}
+                                    <div class="item">
+                                        <a href="{% url 'blog:webzin' webzin.slug %}">
+                                            <div class="cover-item__card" style="background: url({{webzin.cover.url}})">
+                                                <div class="row">
+                                                    <div class="webzin-title col-12">
+                                                        <h4>{{webzin.title}}</h4>
+                                                        <p>Edition : {{webzin.edition}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            
+                            <!-- carousel section end -->
+                            <div class="row">
+                                <div class="col-12"><a href="{% url 'blog:webzins' %}"><button class="float-right btn btn-radius bg-primary text-white ml-15 font-small box-shadow">View All</button></a></div>
+                            </div>
+
+                        </div>
+                        {% endif %}
+
+                        <!-- Videos -->
+                        {% if videos %}
+                        <div class="post-module-2 ">
+                            <div class="widget-header-1 position-relative mb-30 wow fadeInUp animated ">
+                                <h5 class="mt-5 mb-30 ">Videos</h5>
+                            </div>
+                            <div class="loop-list loop-list-style-1">
+                                <div class="row ">
+                                    {% for video in videos %}
+                                    <article class="col-md-6 mb-40 wow fadeInUp animated ">
+                                        <div class="post-card-1 border-radius-10 hover-up ">
+                                            <div class="row">
+                                                <div class="col-lg-5 col-md-5 p-4    pl-4">
+                                                    <div class="post-thumb thumb-overlay img-hover-slide position-relative"
+                                                        style="background-image: url({{video.video_thumbnail.url}}) ">
+                                                        <a class="img-link " href="{% url 'blog:video' video.id %}">
+
+                                                        </a>
+                                                        <!-- <ul class="social-share ">
+                                                                <li><a href="# "><i class="elegant-icon social_share "></i></a>
+                                                                </li>
+                                                                <li><a class="fb " href="# " title="Share on Facebook " target="_blank "><i
+                                                                            class="elegant-icon social_facebook "></i></a></li>
+                                                                <li><a class="tw " href="# " target="_blank " title="Tweet now "><i
+                                                                            class="elegant-icon social_twitter "></i></a></li>
+                                                                <li><a class="pt " href="# " target="_blank " title="Pin it "><i
+                                                                            class="elegant-icon social_pinterest "></i></a></li>
+                                                            </ul> -->
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-7 col-md-7">
+                                                    <div class="post-content p-10 ">
+                                                        <div class="d-flex post-card-content ">
+                                                            <h6 class="post-title mb-20 font-weight-900 ">
+                                                                <a href="{% url 'blog:video' video.id %}">{{video.title}}
+                                                                </a>
+                                                            </h6>
+                                                            <!-- <p> - കുപില തെരുമാനവ</p> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </article>
+                                    {% endfor %}
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12"><a href="{% url 'blog:videos' %}"><button
+                                                class="float-right btn btn-radius bg-primary text-white ml-15 font-small box-shadow">Read
+                                                more</button></a></div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <!-- Short Read -->
+                        {% for category in categories %}
+                        <div class="post-module-2" id="{{category.id}}">
+                            <div class="widget-header-1 position-relative mb-30 wow fadeInUp animated ">
+                                <h5 class="mt-5 ">{{category.name}}</h5>
+                            </div>
+
+                            <div class="loop-list loop-list-style-1">
+                                <div class="row ">
+                                    {% for article in category.get_articles %}
+                                    <article class="col-md-4 col-lg-4 mt-3 wow fadeInUp animated pr-0">
+                                        <div class="post-card-1 border-radius-10 hover-up ">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-4">
+                                                    <div class="post-thumb thumb-overlay img-hover-slide position-relative">
+                                                        <a class="img-link" href="{% url 'blog:article' article.slug %}">
+                                                            <img src="{{article.article_image.url}}" alt="" class="m-auto d-block">
+                                                        </a>                                                       
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-lg-8 col-md-8">
+                                                    <div class="post-content p-10 ">
+                                                        <div class="d-flex post-card-content ">
+                                                            <h6 class="post-title mb-20 font-weight-900 ">
+                                                                <a href="{% url 'blog:article' article.slug %}"
+                                                                    class="article-font-size">{{article.title}} </a>
+                                                            </h6>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 col-md-12">
+                                                    {% for author in article.author.all %}
+                                                    <div class="d-flex p-2">
+
+                                                        <img src="{{author.photo.url}}" alt="" style="width: 30px; height: 30px; object-fit: cover; border-radius: 50%;">
+                                                        {% if article.custom_author %}
+                                                        <p class="pl-3"> {{article.custom_author|safe}}</p>
+                                                        {% else %}
+                                                        <p class="pl-3"> {{author.name}}</p>
+                                                        {% endif %}
+                                                    </div>
+
+                                                    {% endfor %}
+                                                </div>
+                                               
+                                            </div>
+                                        </div>
+                                    </article>
+                                    {% endfor %}
+                                </div>
+                                <div class="row">
+                                    <div class="col-12"><a href="{% url 'blog:articles' category.slug %}"><button class="float-right btn btn-radius bg-primary text-white ml-15 font-small box-shadow">Read more</button></a></div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                        <hr>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

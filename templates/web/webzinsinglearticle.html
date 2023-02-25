@@ -1,0 +1,194 @@
+{% extends 'web/base.html' %} {% load static %} {% block title %}Home{% endblock %}
+
+{% block meta %}
+<meta name="title" content="{{webzinArticle.webzinarticlecategory.name}}">
+<meta name="description" content="{{webzinArticle.title}}">
+<meta property="og:image" content="{{webzinArticle.article_image.crop.1000x600}}">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{request.build_absolute_uri}}">
+<meta property="og:title" content="{{webzinArticle.webzinarticlecategory.name}}">
+<meta property="og:description" content="{{webzinArticle.title}}">
+<!-- Twitter -->
+<meta property="twitter:card" content="{{webzinArticle.webzinarticlecategory.name}}">
+<meta property="twitter:url" content="{{request.build_absolute_uri}}">
+<meta property="twitter:title" content="{{webzinArticle.webzinarticlecategory.name}}">
+<meta property="twitter:description" content="{{webzinArticle.title}}">
+{% endblock meta %}
+{% block content %}
+<main class="bg-grey pb-30">
+    <div class="container single-content">
+
+
+        <!-- Title ,Author and Share links  -->
+        <div class="entry-header entry-header-style-1 mb-50 pt-50">
+            <h1 class="entry-title mb-50 font-weight-900">
+                {{webzinArticle.title}}
+            </h1>
+
+            <div class="row">
+
+                <!-- Author -->
+                <div class="col-md-6">
+                    <div class="entry-meta align-items-center meta-2 font-small color-muted">
+                        <p class="mb-5">
+                            <a class="author-avatar" href="{% url 'blog:webzinauthor' webzinArticle.author.id %}"><img
+                                    class="img-circle" src="{{webzinArticle.author.photo.crop.50x50}}" alt=""></a>
+                            By <a href="{% url 'blog:webzinauthor' webzinArticle.author.id %}"><span
+                                    class="author-name font-weight-bold">{{webzinArticle.author.name}}</span></a>
+                        </p>
+                        <span class="mr-10"> {{ webzinArticle.published|date:"M d, Y" }} </span>
+                        <span class="has-dot"> {{ webzinArticle.read_time}} mins read</span>
+                    </div>
+                </div>
+                <!-- Author -->
+
+
+                <div class="col-md-6 text-right d-none d-md-inline">
+                    <ul class="header-social-network d-inline-block list-inline mr-15">
+                        <li class="list-inline-item text-muted"><span>Share this: </span></li>
+                        <li class="list-inline-item"><a class="social-icon fb text-xs-center" target="_blank"
+                                href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}"><i
+                                    class="elegant-icon social_facebook"></i></a></li>
+                        <li class="list-inline-item"><a class="social-icon tw text-xs-center" target="_blank"
+                                href="https://www.twitter.com/intent/tweet?text={{instance.title|urlencode}}%20{{request.build_absolute_uri}}"><i
+                                    class="elegant-icon social_twitter "></i></a></li>
+                        <li class="list-inline-item"><a class="social-icon pt text-xs-center" target="_blank"
+                                href="https://api.whatsapp.com/send?text=*{{instance.title|urlencode}}*%0A%0A{{instance.summary|urlencode}}%0A{{request.build_absolute_uri}}"><i
+                                    class="fa-brands fa-whatsapp"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    
+
+        <!--Image-->
+        <figure class="image aricle-head mb-30 m-auto text-center border-radius-10">
+            <span class="category-name-in-figure">{{webzinArticle.webzinarticlecategory.name}}</span>
+            <img class="border-radius-10" src="{{webzinArticle.article_image.crop.1000x600}}" alt="post-title" />
+        </figure>
+        <!--figure-->
+
+        <div class="article-content-area rich-text-area">
+            {% if is_subscribed %}
+            {% for content in contents %} {{ content.content | safe }} {% endfor %}
+            
+            {% else %}
+            {% for content in contents %} {{ content.content | safe }} {% endfor %}
+            <div class="text-center">
+                <a href="{% url 'blog:subscription' slug %}" class="btn btn-success text-white">Subscribe to Read more
+                    ..</a>
+            </div>
+            {% endif %}
+        </div>
+
+        <article class="entry-wraper mb-50">
+            <!-- Tags -->
+            <div class="entry-bottom mt-50 mb-30 wow fadeIn animated">
+                <div class="col-md-8 text-md-right font-small align-self-center">
+                    <p class="d-inline-block mr-5 mb-0"><i class="elegant-icon  icon_tag_alt mr-5 text-muted"></i>Tags:
+                    </p>
+                    <ul class="list-inline d-inline-block tags">
+                        {% for tag in atricleTags %}
+                        <li class="list-inline-item"><a href="{% url 'blog:webzin-tags' tag.slug %}">#{{tag.name}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+           
+            <div class="author-bio p-30 mt-50 border-radius-10 bg-white wow fadeIn animated">
+                <div class="author-image mb-30">
+                    <a href="#"><img src="{{webzinArticle.author.photo.crop.100x100}}" alt="" class="avatar"></a>
+                </div>
+                <div class="author-info">
+                    <h4 class="font-weight-bold mb-20"><span class="vcard author"><span class="fn"><a href="{% url 'blog:webzinauthor' webzinArticle.author.id %}"
+                                    title="Posted by Barbara Cartland"
+                                    rel="author">{{webzinArticle.author.name}}</a></span></span>
+                    </h4>
+                    <h5 class="text-muted">About author</h5>
+                    <div class="author-description text-muted">{{webzinArticle.author.about}} </div>
+                    <!-- <a href="author.html" class="author-bio-link mb-md-0 mb-3">View all posts (125)</a> -->
+                    <div class="author-social">
+                        <ul class="author-social-icons">
+                            <li class="author-social-link-facebook"><a href="#" target="_blank"><i
+                                        class="ti-facebook"></i></a></li>
+                            <li class="author-social-link-twitter"><a href="#" target="_blank"><i
+                                        class="ti-twitter-alt"></i></a></li>
+                            <li class="author-social-link-pinterest"><a href="#" target="_blank"><i
+                                        class="ti-pinterest"></i></a></li>
+                            <li class="author-social-link-instagram"><a href="#" target="_blank"><i
+                                        class="ti-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--related posts-->
+            <div class="related-posts">
+                <div class="post-module-3">
+                    <div class="widget-header-2 position-relative mb-30">
+                        <h5 class="mt-5 mb-30">Related posts</h5>
+                    </div>
+                    <div class="loop-list loop-list-style-1">
+
+
+                        {% for article in relatedarticles %}
+                        <article class="col-md-6 mb-40 wow fadeInUp animated ">
+                            <div class="post-card-1 border-radius-10 hover-up ">
+                                <div class="row">
+                                    <div class="col-lg-5 col-md-5 p-4    pl-4">
+                                        <div class="post-thumb thumb-overlay img-hover-slide position-relative"
+                                            style="background-image: url({{article.article_image.crop.332x130}}) ">
+                                            <a class="img-link" href="{% url 'blog:webzinarticle' article.slug %}"></a>
+                                            <ul class="social-share ">
+                                                <li><a href="# "><i class="elegant-icon social_share "></i></a></li>
+                                                <li><a class="fb " target="_blank"
+                                                        href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}"
+                                                        title="Facebook "><i
+                                                            class="elegant-icon social_facebook "></i></a></li>
+                                                <li><a class="tw " target="_blank"
+                                                        href="https://www.twitter.com/intent/tweet?text={{article.webzinarticlecategory.name|urlencode}}%20{{request.build_absolute_uri}}"
+                                                        title="Tweet now "><i
+                                                            class="elegant-icon social_twitter "></i></a></li>
+                                                <li><a class="pt "
+                                                        href="https://api.whatsapp.com/send?text=*{{article.webzinarticlecategory.name|urlencode}}*%0A%0A{{article.title|urlencode}}%0A{{request.build_absolute_uri}}"
+                                                        target="_blank " title="Pin it "><i
+                                                            class="fa-brands fa-whatsapp"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-7 col-md-7">
+                                        <div class="post-content p-10 ">
+                                            <div class="d-flex post-card-content ">
+                                                <h6 class="post-title mb-20 font-weight-900 ">
+                                                    <a href="{% url 'blog:webzinarticle' article.slug %}">{{article.title}}
+                                                    </a>
+                                                </h6>
+                                                <p> - {{article.author.name}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+    <!--container-->
+</main>
+{% endblock %} {% block javascript %}
+<script>
+
+
+    //   page specific scripts
+    console.log("This will run only in index.html")
+</script>
+{% endblock %}

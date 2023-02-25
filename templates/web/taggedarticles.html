@@ -1,0 +1,174 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<main>
+    <div class="container">
+        <div class="hot-tags pt-30 pb-30 font-small align-self-center">
+            <div class="widget-header-3">
+                <div class="row align-self-center">
+                    <div class="col-md-4 align-self-center">
+                        <h5 class="widget-title"># {{tag}}</h5>
+                    </div>
+                    <div class="col-md-8 text-md-right font-small align-self-center">
+                        <p class="d-inline-block mr-5 mb-0"><i
+                                class="elegant-icon  icon_tag_alt mr-5 text-muted"></i>Hot tags:</p>
+                        <ul class="list-inline d-inline-block tags">
+                            {% for tag in tags %}
+                            <li class="list-inline-item"><a href="">#
+                                    {{tag}}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-grey pt-50 mb-4 bg-gry-pl">
+            <div class="container ">
+                <div class="row ">
+                    <div class="col-lg-12 ">
+
+                        <!-- Videos -->
+                        {% if videos %}
+                        <div class="post-module-2 ">
+                            <div class="widget-header-1 position-relative mb-30 wow fadeInUp animated ">
+                                <h5 class="mt-5 mb-30 ">Videos</h5>
+                            </div>
+                            <div class="loop-list loop-list-style-1">
+                                <div class="row ">
+                                    {% for video in videos %}
+                                    <article class="col-md-6 mb-40 wow fadeInUp animated ">
+                                        <div class="post-card-1 border-radius-10 hover-up ">
+                                            <div class="row">
+                                                <div class="col-lg-5 col-md-5 p-4    pl-4">
+                                                    <div class="post-thumb thumb-overlay img-hover-slide position-relative"
+                                                        style="background-image: url({{video.video_thumbnail.crop.180x130}}) ">
+                                                        <a class="img-link " href="#"></a>
+                                                        <ul class="social-share ">
+                                                            <li>
+                                                                <a href="# "><i class="elegant-icon social_share "></i></a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="fb " href="# " title="Share on Facebook " target="_blank "><i class="elegant-icon social_facebook "></i></a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="tw " href="# " target="_blank " title="Tweet now "><i class="elegant-icon social_twitter "></i></a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="pt " href="# " target="_blank " title="Pin it "><i class="elegant-icon social_pinterest "></i></a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-7 col-md-7">
+                                                    <div class="post-content p-10 ">
+                                                        <div class="d-flex post-card-content ">
+                                                            <h6 class="post-title mb-20 font-weight-900 ">
+                                                                <a href="#">{{video.title}} </a>
+                                                            </h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </article>
+                                    {% endfor %}
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <a href="#">
+                                            <button class="float-right btn btn-radius bg-primary text-white ml-15 font-small box-shadow">Read more</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% for category in categories %}
+                        <div class="post-module-2 ">
+                            <div class="widget-header-1 position-relative mb-30 wow fadeInUp animated ">
+                                <h5 class="mt-5 mb-30 ">{{category.name}}</h5>
+                            </div>
+                            <div class="loop-list loop-list-style-1">
+                                <div class="row ">
+                                    {% for article in category.get_articles %}
+                                    <article class="col-md-4 col-lg-4 mb-40 wow fadeInUp animated pr-0 p-4">
+                                        <div class="post-card-1 border-radius-10 hover-up ">
+                                            <div class="row">
+                                                <div class="col-lg-5 col-md-5 p-2 pl-4">
+                                                    <div class="post-thumb thumb-overlay img-hover-slide position-relative"
+                                                        >
+                                                        <img src="{{article.article_image.url}}" alt="">
+                                                        <a class="img-link "
+                                                            href="{% url 'blog:article' article.slug %}"></a>
+                                                        <ul class="social-share ">
+                                                            <li>
+                                                                <a href="# "><i class="elegant-icon social_share "></i></a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="fb " href="# " title="Share on Facebook " target="_blank "><i
+                                                                        class="elegant-icon social_facebook "></i></a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="tw " href="# " target="_blank " title="Tweet now "><i
+                                                                        class="elegant-icon social_twitter "></i></a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="pt " href="# " target="_blank " title="Pin it "><i
+                                                                        class="elegant-icon social_pinterest "></i></a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-7 col-md-7">
+                                                    <div class="post-content p-10 ">
+                                                        <div class="d-flex post-card-content ">
+                                                            <h6 class="post-title mb-20 font-weight-900 ">
+                                                                <a href="{% url 'blog:article' article.slug %}">{{article.title}}
+                                                                </a>
+                                                            </h6>
+                                                            <!-- <p> - കുപില തെരുമാനവ</p> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 col-md-12">
+                                                    {% for author in article.author.all %}
+                                                    <div class="d-flex p-2">
+
+                                                        <img src="{{author.photo.url}}" alt="" style="width: 30px; height: 30px; object-fit: cover; border-radius: 50%;">
+                                                        {% if article.custom_author %}
+                                                        <p class="pl-3"> {{article.custom_author|safe}}</p>
+                                                        {% else %}
+                                                        <p class="pl-3"> {{author.name}}</p>
+                                                        {% endif %}
+                                                    </div>
+
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </article>
+                                    {% endfor %}
+                                </div>
+                                <div class="row">
+                                    <div class="col-12"><a href="/articles/{{category.slug}}/?tag={{tag.slug}}"><button
+                                                class="float-right btn btn-radius bg-primary text-white ml-15 font-small box-shadow">Read
+                                                more</button></a></div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <!-- Short Read -->
+                        <hr>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</main>
+{% endblock %}

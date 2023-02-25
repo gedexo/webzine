@@ -1,0 +1,61 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<main class="bg-grey pt-80 pb-50">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-xl-6 col-md-10">
+        <div class="login_wrap widget-taber-content p-30 bg-white border-radius-10">
+          <div class="padding_eight_all bg-white">
+            <div class="heading_s1 text-center">
+              <h3 class="mb-30 font-weight-900">Subscription</h3>
+            </div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Subscription</th>
+                  <th>Validity</th>
+                  <th> </th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for subscription in subscriptionplan %}
+                <tr>
+                  <th>{{subscription.subscription_title}}</th>
+                  <td>{{subscription.validity_in_month}} Month {% if subscription.is_include_special_edition %}Included
+                    Special Edtion{% endif %}</td>
+                  <td><a href="{% url 'blog:subscribe' subscription.id %}"><button type="button"
+                        class="btn btn-success">{{subscription.amount}} / - Subscribe</button></a></td>
+                </tr>
+                {% endfor %}
+
+                <tr>
+                  <th>Single Subscription</th>
+                  <td>{{webzin.title}} {{webzin.edition}} {% if webzin.is_special_edition %}(Special Edtion){% endif %}
+                  </td>
+                  <td><a href="{% url 'blog:singlesubscribe' webzin.id %}"><button type="button"
+                        class="btn btn-success">{{webzin.single_Subscription_amount}} / - Subscribe</button></a></td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+  $(document).ready(function () {
+  })
+  //   page specific scripts
+  console.log("This will run only in index.html")
+</script>
+{% endblock %}

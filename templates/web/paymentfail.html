@@ -1,0 +1,97 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<main class="bg-grey pt-80 pb-50">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-xl-6 col-md-10">
+        <div class="card login_wrap widget-taber-content p-30 bg-white border-radius-10">
+          <div class="card-body">
+            <div class="text-center">
+              <h5 class="card-title">Payment Status</h5>
+            </div>
+
+
+
+            <div class="text-center">
+              <h2 class="text-danger" id="referralerror">Payment Failed </h2>
+            </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+  $(document).ready(function () {
+  })
+  //   page specific scripts
+  console.log("This will run only in index.html")
+</script>
+
+<!-- <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+  var options = {
+
+    // Enter the Key ID generated from the Dashboard
+    key: "{{ razorpay_merchant_key }}",
+
+    // Amount is in currency subunits.
+    // Default currency is INR. Hence,
+    // 50000 refers to 50000 paise
+    amount: "{{ razorpay_amount }}",
+    currency: "{{ currency }}",
+
+    // Your/store name.
+    name: "Viswamaithri Subscription",
+
+    // Pass the `id` obtained in the response of Step 1
+    order_id: "{{ razorpay_order_id }}",
+    callback_url: "{{ callback_url }}",
+  };
+
+  // initialise razorpay with the options.
+  var rzp1 = new Razorpay(options);
+
+  // add event listener to the payment button.
+  document.getElementById("pay-btn").onclick = function (e) {
+    if (document.getElementById("referalcode").value != '') {
+      var code = document.getElementById("referalcode").value;
+      var orderId = document.getElementById("razorpay-order-id").value;
+      var data = {
+        'code': code,
+        'orderId': orderId
+      }
+      $.ajax({
+        url: '/add-referrel-code/',
+        type: 'POST',
+        data: data,
+        dataType: "json",
+        cache: false,
+        success: function (response) {
+          rzp1.open();
+          e.preventDefault();
+        },
+        error: function (jqXHR) {
+          $('#referralerror').html("Wrong Referral Code")
+          return 0;
+        },
+      });
+    }
+    else {
+      rzp1.open();
+      e.preventDefault();
+    }
+  };
+</script> -->
+{% endblock %}

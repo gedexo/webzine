@@ -1,0 +1,136 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block title %}Author{% endblock %}
+
+{% block content %}
+
+    <main>
+        <div class="container">
+            <div class="hot-tags pt-30 pb-30 font-small align-self-center">
+                <div class="widget-header-3">
+                    <div class="row align-self-center">
+                        <div class="col-md-4 align-self-center">
+                            <h5 class="widget-title">Featured posts</h5>
+                        </div>
+                        {% include 'web/partials/hottags.html' %}
+                    </div>
+                </div>
+            </div>
+
+           
+            <div class="author-bio p-30 mt-50 border-radius-10 bg-white wow fadeIn animated">
+                <div class="author-image mb-30">
+                    <a href="#"><img src="{{author.photo.crop.90x90}}" alt="" class="avatar"></a>
+                </div>
+                <div class="author-info">
+                    <h4 class="font-weight-bold mb-20"><span class="vcard author"><span class="fn"><a href="#" title="Posted by Barbara Cartland" rel="author">{{author.name}}</a></span></span>
+                    </h4>
+                    <h5 class="text-muted">About author</h5>
+                    <div class="author-description text-muted">{{author.about}}</div>
+                    <a href="#" class="author-bio-link mb-md-0 mb-3"></a>
+                    <div class="author-social">
+                        <ul class="author-social-icons">
+                            <li class="author-social-link-facebook"><a href="#" target="_blank"><i class="ti-facebook"></i></a></li>
+                            <li class="author-social-link-twitter"><a href="#" target="_blank"><i class="ti-twitter-alt"></i></a></li>
+                            <li class="author-social-link-pinterest"><a href="#" target="_blank"><i class="ti-pinterest"></i></a></li>
+                            <li class="author-social-link-instagram"><a href="#" target="_blank"><i class="ti-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="bg-grey pt-50 pb-50 ">
+                <div class="container ">
+                    <div class="row ">
+                        <div class="col-lg-12 ">
+        
+                           <!-- Short Read -->
+                           {% for article in webzinearticle %}
+                            
+                           <div class="post-module-2" id="{{article.category.id}}">
+                               <div class="widget-header-1 position-relative mb-30 wow fadeInUp animated ">
+                                   <h5 class="mt-5 mb-30">{{article.webzinarticlecategory.name}}</h5>
+                               </div>
+                               <div class="loop-list loop-list-style-1">
+                                   <div class="row ">
+                                       <article class="col-md-6 col-lg-6 mb-40 wow fadeInUp animated pr-0 p-4">
+                                           <div class="post-card-1 border-radius-10 hover-up ">
+                                               <div class="row">
+                                                   <div class="col-lg-5 col-md-5 p-2 pl-4">
+                                                       <div class="post-thumb thumb-overlay img-hover-slide position-relative">
+                                                           <a class="img-link " href="{% url 'blog:webzinarticle' article.slug %}">
+                                                            <img src="{{article.article_image.url}}" alt="">
+                                                           </a>
+                                                           <ul class="social-share ">
+                                                               <li><a href="# "><i class="elegant-icon social_share "></i></a>
+                                                               </li>
+                                                               <li><a class="fb " href="# " title="Share on Facebook " target="_blank "><i
+                                                                           class="elegant-icon social_facebook "></i></a></li>
+                                                               <li><a class="tw " href="# " target="_blank " title="Tweet now "><i
+                                                                           class="elegant-icon social_twitter "></i></a></li>
+                                                               <li><a class="pt " href="# " target="_blank " title="Pin it "><i
+                                                                           class="elegant-icon social_pinterest "></i></a></li>
+                                                           </ul>
+                                                       </div>
+                                                   </div>
+                                                   <div class="col-lg-7 col-md-7">
+                                                       <div class="post-content p-10 ">
+                                                           <div class="d-flex post-card-content ">
+                                                               <h6 class="post-title mb-20 font-weight-900 ">
+                                                                   <a href="{% url 'blog:webzinarticle' article.slug %}">{{article.title}} </a>
+                                                               </h6>
+                                                               <p> - {{article.author.name}}</p>
+                                                           </div>
+                                                       </div>
+                                                   </div>
+                                               </div>  
+                                           </div>
+                                       </article>
+                                      
+                                   </div>
+                                   <div class="row"><div class="col-12"><a href="{% url 'blog:articles' article.webzinarticlecategory.slug %}"><button class="float-right btn btn-radius bg-primary text-white ml-15 font-small box-shadow">Read more</button></a></div></div>
+                               </div>
+                           </div>
+                           {% endfor %}
+        
+        
+                           <!-- Short Read -->
+                            <hr>
+        
+                            <div class="pagination-area mb-30 wow fadeInUp animated ">
+                                <nav aria-label="Page navigation example ">
+                                    <ul class="pagination justify-content-start ">
+                                        <li class="page-item "><a class="page-link " href="# "><i
+                                                    class="elegant-icon arrow_left "></i></a></li>
+                                        <li class="page-item active "><a class="page-link " href="# ">01</a></li>
+                                        <li class="page-item "><a class="page-link " href="# ">02</a></li>
+                                        <li class="page-item "><a class="page-link " href="# ">03</a></li>
+                                        <li class="page-item "><a class="page-link " href="# ">04</a></li>
+                                        <li class="page-item "><a class="page-link " href="# "><i
+                                                    class="elegant-icon arrow_right "></i></a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+            
+    </main>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+    //   page specific scripts
+    console.log("This will run only in index.html")
+</script>
+{% endblock %}

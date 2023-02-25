@@ -1,0 +1,66 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<main class="bg-grey pt-80 pb-50">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-md-10">
+                <div class="login_wrap widget-taber-content p-30 bg-white border-radius-10">
+                    <div class="padding_eight_all bg-white">
+                        <div class="heading_s1 text-center">
+                            <h3 class="mb-30 font-weight-900">Register</h3>
+                        </div>
+                        <form method="post">
+                            {% csrf_token %}
+                            <p class="text-danger">{{error}}</p>
+                            <div class="form-group">
+                                <input type="text" required="" class="form-control" value="{{name}}" name="name"
+                                    placeholder="Your Name">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" required="" class="form-control" value="{{phone}}" name="phone"
+                                    placeholder="Phone">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" required="" class="form-control" value="{{email}}" name="email"
+                                    placeholder="Your Email">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" required="" type="password" value="{{password}}"
+                                    name="password" placeholder="Password">
+                            </div>
+
+                            <div class="form-group">
+                                <input class="form-control" required="" type="password" value="{{password1}}"
+                                    name="password1" placeholder="Confirm Password">
+                                <p class="text-danger">{{error1}}</p>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="button button-contactForm btn-block">Register</button>
+                            </div>
+                        </form>
+                        <div class="divider-text-center mt-15 mb-15">
+                            <span> or</span>
+                        </div>
+                        <div class="text-muted text-center"><a href="{% url 'blog:login' %}">Sign In</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $(document).ready(function () {
+    })
+    //   page specific scripts
+    console.log("This will run only in index.html")
+</script>
+{% endblock %}

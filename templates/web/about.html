@@ -1,0 +1,81 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<main class="bg-grey pb-30">
+    <div class="container single-content">
+        <div class="entry-header entry-header-style-1 mb-50 pt-50 text-center">
+            <h1 class="entry-title mb-20 font-weight-900 ">
+                About
+            </h1>
+            <p class="text-muted"><span class="typewrite d-inline" data-period="2000"
+                    data-type='[ " News. ", "Views. ", "Insights " ]'></span></p>
+        </div>
+        <!--end single header-->
+
+        <!--figure-->
+        <article class="entry-wraper">
+            <p class="font-large">Viswamaithri Website accessed through viswamaithrithinks.com is a non-profit
+                organization constituted under the creative supervision of Viswavidya Gurukulam. The prime objective is
+                to put forward creative and productive thinking to be a popular endeavor.
+
+                The state has to ensure the well-being of all that constitutes its structure. Irrespective of
+                discrepancies based on any cultural practices such as caste, religion, or political lineage all the
+                citizens must be a part of such an initiative.
+
+                The central ideologies of this community are the humanitarian and ethical values of all religious and
+                cultural philosophies. We encourage an enlightened civilian movement. It should be a mission to seek the
+                voluntary participation of all patriots who respect human values, regardless of caste, creed, or
+                political affiliation. We set forth, propose and contribute to such an endeavour.</p>
+            <hr class="wp-block-separator is-style-wide">
+            <p><span class="mr-5">
+                    <ion-icon name="location-outline" role="img" class="md hydrated" aria-label="location outline">
+                    </ion-icon>
+                </span><strong>Address</strong>: Sakthibodhi Gurukulam,Thiroor (road) ,Mulankunnathu kaavu PO,Pottore,
+                Thrissur Dt, 680581 </p>
+
+            <h3 class="mt-30">Crew</h3>
+            <hr class="wp-block-separator is-style-wide">
+            <div class="row">
+                <div class="col-lg-4 col-sm-12">
+                    <h5>BADARI NARAYANAN</h5>
+                    <p>Chendhamangalath Palakeezh Illam
+                        <br>PO Karanthat
+                        <br>Kannur
+                        <br>670308
+                        <br>badarimutual@gmail.com
+                    </p>
+                </div>
+                <div class="col-lg-4 col-sm-12">
+                    <h5>Dr. ZACHARIA JOSEPH</h5>
+                    <p>Karuvanchal Dental Clinic
+                        <br>Karuvanchal
+                        <br>Kannur
+                        <br>670571
+                        <br>zacsuma@gmail.com
+                    </p>
+                </div>
+                <div class="col-lg-4 col-sm-12">
+                    <h5>C.M.A. RASHEED</h5>
+                    <p>Chakkalakkal
+                        <br>Azhicode PO
+                        <br>Thrissur
+                        <br>680666
+                    </p>
+                </div>
+            </div>
+
+        </article>
+    </div>
+    <!--container-->
+</main>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    //   page specific scripts
+    console.log("This will run only in index.html")
+</script>
+{% endblock %}
